@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
@@ -20,14 +22,14 @@ public class ProdutoController {
       private final ProdutoService produtoService;
 
       @PostMapping
-      public ResponseEntity<Product> criarProduto(@RequestBody Product product) {
-            return ResponseEntity.created(URI.create(product.getId())).body(produtoService.criarProduto(product));
+      public ResponseEntity<Product> criarProduto(@Valid @RequestBody Product product) {
+            return ResponseEntity.created(null).body(produtoService.criarProduto(product));
       }
 
       @PutMapping("{id}")
       public ResponseEntity<Product> atualizarProduto(@PathVariable String id,
                                                       @RequestBody Product product) {
-            return ResponseEntity.created(URI.create(product.getId())).body(produtoService.atualizarProduto(id, product));
+            return ResponseEntity.ok().body(produtoService.atualizarProduto(id, product));
       }
 
       @GetMapping("{id}")
