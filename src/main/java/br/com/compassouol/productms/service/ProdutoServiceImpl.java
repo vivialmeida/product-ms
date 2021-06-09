@@ -2,6 +2,7 @@ package br.com.compassouol.productms.service;
 
 import br.com.compassouol.productms.model.Product;
 import br.com.compassouol.productms.repository.ProdutoRepository;
+import br.com.compassouol.productms.repository.ProdutoRepositoryTemplate;
 import br.com.compassouol.productms.service.exception.ProductException;
 import br.com.compassouol.productms.service.interfaces.ProdutoService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ProdutoServiceImpl implements ProdutoService {
 
       private final ProdutoRepository produtoRepository;
+      private final ProdutoRepositoryTemplate produtoRepositoryTemplate;
 
       @Override
       public Product criarProduto(Product product) {
@@ -55,7 +57,8 @@ public class ProdutoServiceImpl implements ProdutoService {
       @Override
       public List<Product> buscarProdutosPorFiltros(String q, BigDecimal min_price, BigDecimal max_price) {
 
-            return null;
+           return produtoRepository.findProductsByPriceBetween(min_price.toString(), max_price.toString());
+
       }
 
 
