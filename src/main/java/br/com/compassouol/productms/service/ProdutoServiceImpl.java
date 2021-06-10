@@ -57,7 +57,7 @@ public class ProdutoServiceImpl implements ProdutoService {
       @Override
       public List<Product> buscarProdutosPorFiltros(String q, BigDecimal min_price, BigDecimal max_price) {
 
-           return produtoRepository.findProductsByPriceBetween(min_price.toString(), max_price.toString());
+           return produtoRepositoryTemplate.recuperarProdutoPorFiltro(q,min_price, max_price);
 
       }
 

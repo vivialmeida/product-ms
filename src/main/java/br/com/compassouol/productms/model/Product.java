@@ -3,7 +3,8 @@ package br.com.compassouol.productms.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +20,7 @@ public class Product{
       private String name;
       @NotEmpty
       private String description;
-      @Min(0)
+      @Min(0) @Field(targetType = FieldType.DECIMAL128)
       private BigDecimal price;
 
 }

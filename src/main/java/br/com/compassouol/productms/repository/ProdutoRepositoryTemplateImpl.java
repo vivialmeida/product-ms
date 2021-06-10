@@ -16,47 +16,29 @@ import java.util.Objects;
 public class ProdutoRepositoryTemplateImpl implements ProdutoRepositoryTemplate {
 
       private final MongoTemplate mongoTemplate;
-//
-//      public List<String> recuperarProdutoPorFiltro(String q, BigDecimal min_price, BigDecimal max_price){
-//            Query query = new Query();
-//            if (Objects.nonNull(empresa.getFantasia())) {
-//                  query.addCriteria(Criteria.where("fantasia").is(empresa.getFantasia()));
-//            }
-//            if (Objects.nonNull(empresa.getCnpj())) {
-//                  query.addCriteria(Criteria.where("cnpj").is(empresa.getCnpj()));
-//            }
-//            query.fields().include("id");
-//            List<Empresa> empresas = mongoTemplate.find(query, Empresa.class);
-//
-//            return empresas.stream().map(Empresa::getId)
-//                    .collect(Collectors.toList());
-//
-//
-//      }
-
 
       @Override
       public List<Product> recuperarProdutoPorFiltro(String q, BigDecimal min_price, BigDecimal max_price) {
-//            Query query = new Query();
-//            if (Objects.nonNull(q)) {
-//                  query.addCriteria(Criteria.where("name").is(q).orOperator().);
-//            }
-//            if (Objects.nonNull(min_price)) {
-//                  query.addCriteria(Criteria.where("price").gte(min_price));
-//            }
-//
-//            if (Objects.nonNull(max_price)) {
-//                  query.addCriteria(Criteria.where("price").lte(max_price));
-//            }
-//            List<Product> products = mongoTemplate.find(query, Product.class);
-//
-            return null;
+            Query query = new Query();w
+            Criteria criteria = new Criteria();
+
+            if (Objects.nonNull(q)) {
+                  criteria.orOperator(
+                          criteria.where("name").is(q), criteria.where("description").is(q));
+            }
+            if (Objects.nonNull(min_price)) {
+                  criteria.and("price").gte(min_price);
+            }
+
+            if (Objects.nonNull(max_price)) {
+                  criteria.andOperator(Criteria.where("price").lte(max_price));
+            }
+
+            query.addCriteria(criteria);
+
+            return mongoTemplate.find(query, Product.class);
 
 
       }
 
 }
-
-
-//        min_price	deverá bater o valor ">=" contra o campo price
-//        max_price	deverá bater o valor "<=" contra o campo price
