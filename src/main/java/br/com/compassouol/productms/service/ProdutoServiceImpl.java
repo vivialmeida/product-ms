@@ -4,6 +4,7 @@ import br.com.compassouol.productms.model.Product;
 import br.com.compassouol.productms.repository.ProdutoRepository;
 import br.com.compassouol.productms.repository.ProdutoRepositoryTemplate;
 import br.com.compassouol.productms.service.exception.ProductException;
+import br.com.compassouol.productms.service.exception.ProductNotFoundException;
 import br.com.compassouol.productms.service.interfaces.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
       @Override
       public Product buscarProdutoPorId(String id) {
-            return  produtoRepository.findById(id).orElseThrow(() -> new ProductException(""));
+            return  produtoRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(String.format("Não foi possível localizar produto com id %s .", id)));
       }
 
       @Override
@@ -51,12 +52,15 @@ public class ProdutoServiceImpl implements ProdutoService {
       @Override
       public void excluirProduto(String id) {
 
+            if (!produtoRepository.existsById(id)){
+                throw new ProductNotFoundException(String.format("Não foi possível localizar produto com id %s .", id));
+            }
+
             produtoRepository.deleteById(id);
       }
 
       @Override
       public List<Product> buscarProdutosPorFiltros(String q, BigDecimal min_price, BigDecimal max_price) {
-
            return produtoRepositoryTemplate.recuperarProdutoPorFiltro(q,min_price, max_price);
 
       }

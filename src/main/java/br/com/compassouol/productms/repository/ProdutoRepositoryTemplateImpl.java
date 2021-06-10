@@ -19,7 +19,7 @@ public class ProdutoRepositoryTemplateImpl implements ProdutoRepositoryTemplate 
 
       @Override
       public List<Product> recuperarProdutoPorFiltro(String q, BigDecimal min_price, BigDecimal max_price) {
-            Query query = new Query();w
+            Query query = new Query();
             Criteria criteria = new Criteria();
 
             if (Objects.nonNull(q)) {
