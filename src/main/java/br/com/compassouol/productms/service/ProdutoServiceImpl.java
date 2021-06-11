@@ -8,7 +8,6 @@ import br.com.compassouol.productms.service.exception.ProductNotFoundException;
 import br.com.compassouol.productms.service.interfaces.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +40,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 
       @Override
       public Product buscarProdutoPorId(String id) {
-            return  produtoRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(String.format("Não foi possível localizar produto com id %s .", id)));
+            return  produtoRepository.findById(id)
+                    .orElseThrow(() -> new ProductNotFoundException(String.format("Não foi possível localizar produto com id %s .", id)));
       }
 
       @Override
