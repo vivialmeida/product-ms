@@ -12,3 +12,5 @@ DELETE	/products/	Deleção de um produto
 
 - Documentacao 
 http://localhost:9999/swagger-ui.html
+
+- Para rodar a aplicação a classe ProductMsApplication deve ser executada
